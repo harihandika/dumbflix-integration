@@ -1,0 +1,27 @@
+Register :
+{
+    "name":"Hari Handika2 admin",
+    "email":"harihandika2@gmail.com",
+    "password":"1234",
+    "gender":"laki-laki",
+    "phone":"08526767",
+    "address":"dalalal"
+
+}
+
+Login:
+{
+        "email": "harihandika244@gmail.com",
+        "password": "1234",
+    "token":""
+}
+
+Category : -Get:
+{
+    "name": "Movies"
+}
+-Update :
+{
+    "name":"TV Show"
+}
+

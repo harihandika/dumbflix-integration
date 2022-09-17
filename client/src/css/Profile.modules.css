@@ -1,0 +1,12 @@
+.changePhotoBtn {
+  margin-left: 60px;
+  width: 60%;
+}
+
+.profile__img {
+  margin-left: 60px;
+  width: 60%;
+  height: 300px;
+  object-fit: cover;
+}
+ 
