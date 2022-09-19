@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import NavSchemesExample from "../components/Navbar";
+import NavbarProfil from "../components/NavbarProfil";
 import ImgOverlayExample from "../components/Carousel";
 import TVSeriesContainer from "../components/TVShows/TvShowsContainer";
 import TvSeriesTab from "../components/TVShows/TVSeriesTab";
@@ -8,7 +8,7 @@ import TvSeriesTab from "../components/TVShows/TVSeriesTab";
 const TVSeries = () => {
   return (
     <div>
-      <NavSchemesExample />
+      <NavbarProfil />
       <ImgOverlayExample />
       <TVSeriesContainer />
       <TvSeriesTab />

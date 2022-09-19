@@ -1,15 +1,15 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from "../components/Navbar";
+import NavbarProfil from "../components/NavbarProfil";
 import DetailFilms from "../components/DetailFilms";
 
-const Home = () => {
+const FilmDetails = () => {
   return (
     <div>
-      <Navbar />
+      <NavbarProfil  />
       <DetailFilms />
     </div>
   );
 };
 
-export default Home;
+export default FilmDetails;

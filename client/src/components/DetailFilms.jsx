@@ -14,17 +14,9 @@ const Detail = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (user) setIsLogin(true);
-    else {
-      setIsLogin(false);
-      navigate("/");
-    }
-  }, [user]);
-
   return (
     <>
-      <div style={{backgroundColor: "black", marginTop: '70px'}} className="d-flex justify-content-center">
+      <div style={{backgroundColor: "black", marginTop: '100px'}} className="d-flex justify-content-center">
         <iframe
           width="1000"
           height="500"

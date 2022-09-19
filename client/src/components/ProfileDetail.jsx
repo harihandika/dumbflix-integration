@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import ProfileIcon from "../img/profileIcon.jpg";
 import "../css/Profile.modules.css";
 import { useNavigate } from "react-router-dom";
+import { useQuery, useMutation } from 'react-query';
+import { API } from '../config/api';
+import {UserContext} from '../context/userContext';
 import { useEffect } from "react";
 import {
   FaEnvelope,
@@ -26,12 +29,18 @@ const initialUserState = {
   status: "Active",
 };
 
-const Profile = () => {
+
+
+const ProfileDetail = () => {
+  let { data: users } = useQuery('usersCache', async () => {
+    const response = await API.get('/users');
+    return response.data.data;
+  });
   const [isLogin, setIsLogin] = useState(false);
+  const [state] = useContext(UserContext);
+
 
   const [userData, setUserData] = useState(initialUserState);
-
-  const user = JSON.parse(localStorage.getItem("user"));
 
   const navigate = useNavigate();
 
@@ -42,42 +51,16 @@ const Profile = () => {
   const handleFileChange = (files) => {
     setUserData({ ...userData, photo: files });
   };
+  console.log("prof",state.user);
 
-  useEffect(() => {
-    if (user) {
-      setIsLogin(true);
-      setUserData({
-        ...userData,
-        email: user?.email,
-        password: user?.password,
-        fullName: user?.fullName,
-        gender: user?.gender,
-        phone: user?.phone,
-        address: user?.address,
-      });
-    } else {
-      setIsLogin(false);
-      setUserData(initialUserState);
-      navigate("/");
-    }
-  }, [user, isLogin]);
-
-  useEffect(() => {
-    // Image upload
-    if (userData.photo != ProfileIcon) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        let result = reader.result;
-        setProfileSrc(result);
-      };
-      reader.readAsDataURL(userData.photo);
-    }
-  }, [userData.photo]);
-
+// const id = (state.user.id - 1)
+console.log("users",users)
+// console.log(id)
   return (
     <Container>
-      <Row className="justify-content-center">
+      <Row className="justify-content-center mt-4">
         <Col md={8}>
+
           <Card
             style={{ width: "800px", height: "650px", marginTop: "70px" }}
             className="rounded shadow border-0 bg-dark text-white p-5"
@@ -89,14 +72,14 @@ const Profile = () => {
                   <div className="d-flex mb-3 align-items-start">
                     <FaUserCircle className="text-danger me-3 fs-1" />
                     <div>
-                      <h5>{userData.fullName}</h5>
+                      <h5>{state.user.fullname}</h5>
                       <p className="text-muted">Full Name</p>
                     </div>
                   </div>
                   <div className="d-flex mb-3 align-items-start">
                     <FaEnvelope className="text-danger me-3 fs-1" />
                     <div>
-                      <h5>{userData.email}</h5>
+                      <h5>{state.user.email}</h5>
                       <p className="text-muted">Email Address</p>
                     </div>
                   </div>
@@ -108,20 +91,20 @@ const Profile = () => {
                     </div>
                   </div>
                   <div className="d-flex mb-3 align-items-start">
-                    {userData.gender === "Male" ? (
+                    {state.user.gender !== "Male" ? (
                       <FaMale className="text-danger me-3 fs-1" />
                     ) : (
                       <FaFemale className="text-danger me-3 fs-1" />
                     )}
                     <div>
-                      <h5>{userData.gender}</h5>
+                      <h5>{state.user.gender}</h5>
                       <p className="text-muted">Gender</p>
                     </div>
                   </div>
                   <div className="d-flex mb-3 align-items-start">
                     <FaPhone className="text-danger me-3 fs-1" />
                     <div>
-                      <h5>{userData.phone}</h5>
+                      <h5>{state.user.phone}</h5>
                       <p className="text-muted">Phone Number</p>
                     </div>
                   </div>
@@ -129,7 +112,7 @@ const Profile = () => {
                   <div className="d-flex mb-3 align-items-start">
                     <FaMapMarked className="text-danger me-3 fs-1" />
                     <div>
-                      <h5>{userData.address}</h5>
+                      <h5>{state.user.addres}</h5>
                       <p className="text-muted">Address</p>
                     </div>
                   </div>
@@ -167,4 +150,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfileDetail ;

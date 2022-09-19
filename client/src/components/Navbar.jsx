@@ -6,14 +6,25 @@ import { FaUserAlt, FaMoneyBillAlt, FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import ProfileIcon from "../img/profileIcon.jpg";
 import Logo from "../img/dumbflix.png";
-import AuthModal from "./Modal";
+import Register from "./Register";
+import Login from "./Login";
 
-const Header = () => {
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+const NavbarLogin = () => {
+  const [isLogin, setIsLogin] = useState(true);
+  const [loginShow, setLoginShow] = useState(false);
+  const [registerShow, setRegisterShow] = useState(false);
 
-  const [isLogin, setIsLogin] = useState(false);
+  const registerHere = (e) => {
+    e.preventDefault();
+    setRegisterShow(false);
+    setLoginShow(true);
+  };
+
+  const loginHere = (e) => {
+    e.preventDefault();
+    setLoginShow(false);
+    setRegisterShow(true);
+  };
 
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -79,9 +90,8 @@ const Header = () => {
               <img src={Logo} alt="" />
             </Navbar.Brand>
           </div>
-
+          {isLogin ? (
           <Nav className="ms-auto">
-            {isLogin ? (
               <Dropdown>
                 <Dropdown.Toggle
                   style={{ marginRight: "50px" }}
@@ -106,28 +116,46 @@ const Header = () => {
                     <span>Pay</span>
                   </Dropdown.Item>
                   <Dropdown.Divider className="bg-secondary" />
-                  <Dropdown.Item href="#" onClick={handleLogout}>
+                  <Dropdown.Item href="#" onClick={() => setIsLogin(false)}>
                     <FaSignOutAlt className="text-danger me-2" />
                     <span>Logout</span>
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-            ) : (
+          </Nav>
+          ):(
+          <Nav className="ms-auto">
+              <div>
               <Button
                 style={{ marginRight: "20px" }}
                 variant="danger"
-                onClick={handleShow}
+                onClick={() => setLoginShow(true)}
               >
-                Sign In
+                Login
               </Button>
-            )}
-            <AuthModal show={show} handleClose={handleClose} />
-            <AuthModal show={show} handleClose={handleClose} />
+
+              <Button
+                style={{ marginRight: "20px" }}
+                variant="danger"
+                onClick={() => setRegisterShow(true)}
+              >
+                Registrasi
+              </Button>
+              </div>
+            <Login
+        loginHere={loginHere}
+        loginShow={loginShow}
+        setLoginShow={setLoginShow}
+        setIsLogin={setIsLogin} />
+            <Register registerHere={registerHere}
+        registerShow={registerShow}
+        setRegisterShow={setRegisterShow} />
           </Nav>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
 };
 
-export default Header;
+export default NavbarLogin;

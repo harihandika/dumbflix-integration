@@ -1,9 +1,5 @@
 package transactionsdto
 
-import (
-	"time"
-)
-
 type CreateTransactionRequest struct {
 	// StartDate time.Time `json:"startdate" form:"startdate" validate:"required"`
 	// DueDate   time.Time `json:"duedate" form:"duedate" validate:"required"`
@@ -13,8 +9,8 @@ type CreateTransactionRequest struct {
 }
 
 type UpdateTransactionRequest struct {
-	StartDate time.Time `json:"startdate" form:"startdate"`
-	DueDate   time.Time `json:"duedate" form:"duedate"`
-	Attache   string    `json:"image"  form:"image"`
-	Status    string    `json:"status" form:"status"`
+	// StartDate time.Time `json:"startdate" form:"startdate"`
+	// DueDate   time.Time `json:"duedate" form:"duedate"`
+	Attache string `json:"image"  form:"image"`
+	Status  string `json:"status" form:"status"`
 }

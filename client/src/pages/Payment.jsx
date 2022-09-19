@@ -1,11 +1,11 @@
 import React from "react";
-import NavSchemesExample from "../components/Navbar";
+import NavbarProfil from "../components/NavbarProfil";
 import Paymentuser from "../components/Paymentuser";
 
 export default function Payment() {
   return (
     <div>
-      <NavSchemesExample />
+      <NavbarProfil />
       <Paymentuser />
     </div>
   );

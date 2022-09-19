@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import NavSchemesExample from "../components/Navbar";
+import NavbarProfil from "../components/NavbarProfil";
 import ImgOverlayExample from "../components/Carousel";
 import MoviesContainer from "../components/Movies/MoviesContainer";
 import MoviesTab from "../components/Movies/MoviesTab";
@@ -8,7 +8,7 @@ import MoviesTab from "../components/Movies/MoviesTab";
 const Movies = () => {
   return (
     <div>
-      <NavSchemesExample />
+      <NavbarProfil />
       <ImgOverlayExample />
       <MoviesContainer />
       <MoviesTab />

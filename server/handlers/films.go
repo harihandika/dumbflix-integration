@@ -118,13 +118,22 @@ func (h *handlerFilm) CreateFilm(w http.ResponseWriter, r *http.Request) {
 func (h *handlerFilm) UpdateFilm(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	request := new(filmsdto.UpdateFilmRequest)
-	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		response := dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()}
-		json.NewEncoder(w).Encode(response)
-		return
+	dataContex := r.Context().Value("dataFile")
+	filename := dataContex.(string)
+
+	request := filmsdto.UpdateFilmRequest{
+		Title:     r.FormValue("title"),
+		Year:      r.FormValue("year"),
+		Desc:      r.FormValue("desc"),
+		Thumbnail: filename,
 	}
+	// request := new(filmsdto.UpdateFilmRequest)
+	// if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
+	// 	w.WriteHeader(http.StatusBadRequest)
+	// 	response := dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()}
+	// 	json.NewEncoder(w).Encode(response)
+	// 	return
+	// }
 
 	id, _ := strconv.Atoi(mux.Vars(r)["id"])
 	film, err := h.FilmRepository.GetFilm(int(id))
@@ -145,6 +154,10 @@ func (h *handlerFilm) UpdateFilm(w http.ResponseWriter, r *http.Request) {
 
 	if request.Year != "" {
 		film.Year = request.Year
+	}
+
+	if request.Desc != "" {
+		film.Desc = request.Desc
 	}
 
 	data, err := h.FilmRepository.UpdateFilm(film)

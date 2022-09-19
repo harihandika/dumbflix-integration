@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { Routes, Route, BrowserRouter, useNavigate } from "react-router-dom";
 import Movies from "./pages/Movies";
 import Home from "./pages/Home";
+import HomeAuth from "./pages/HomeAuth";
 import TVShows from "./pages/TVSeries";
 import FilmDetails from "./pages/FilmDetails";
 import ProfileDetails from "./pages/ProfileDetails";
@@ -23,25 +24,26 @@ if (localStorage.token) {
 export default function App() {
   let navigate = useNavigate();
   const [state, dispatch] = useContext(UserContext);
-  console.clear();
-  console.log(state);
+  // console.clear();
+  console.log("ini state", state)
   useEffect(() => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
+    console.log(state.isLogin);
 
     // Redirect Auth
-    if (state.isLogin === false) {
-      navigate('/auth');
-    } else {
-      if (state.user.status === 'admin') {
-        navigate('/product-admin');
-      } else if (state.user.status === 'customer') {
-        navigate('/');
-      }
-    }
+    // if (state.isLogin === false) {
+    //   navigate('/auth');
+    // } else {
+    //   if (state.user.status === 'admin') {
+    //     navigate('/homeadmin');
+    //   } else if (state.user.status === '') {
+    //     navigate('/');
+    //   }
+    // }
   }, [state]);
-
+// console.log("bacaaa",isLogin)
   const checkUser = async () => {
     try {
       const response = await API.get('/check-auth');
@@ -54,7 +56,9 @@ export default function App() {
       }
 
       // Get user data
-      let payload = response.data.data.user;
+      let payload = response.data.data;
+
+      console.log("ini payload", payload);
       // Get token from local storage
       payload.token = localStorage.token;
 
@@ -77,6 +81,7 @@ export default function App() {
   return (
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/auth" element={<HomeAuth />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/tvshows" element={<TVShows />} />
         <Route path="/details" element={<FilmDetails />} />

@@ -114,12 +114,13 @@ func (h *handlerTransaction) CreateTransaction(w http.ResponseWriter, r *http.Re
 func (h *handlerTransaction) UpdateTransaction(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	request := new(transactionsdto.UpdateTransactionRequest)
-	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		response := dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()}
-		json.NewEncoder(w).Encode(response)
-		return
+	dataContex := r.Context().Value("dataFile") // add this code
+	filename := dataContex.(string)
+	// user, _ := strconv.Atoi(r.FormValue("user"))
+
+	request := transactionsdto.UpdateTransactionRequest{
+		Status:  r.FormValue("status"),
+		Attache: os.Getenv("PATH_FILE") + filename,
 	}
 
 	id, _ := strconv.Atoi(mux.Vars(r)["id"])
