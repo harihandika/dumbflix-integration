@@ -115,7 +115,7 @@ export default function App() {
         />
 
         <Route
-          path="/detailadmin"
+          path="/film/:id"
           element={
             <Layout>
               <Detailadmin />

@@ -1,35 +1,35 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import MovieListadmin from "./MovieListadmin";
-import dataMovies from "../../dataDummy/DataFakeMovies";
 import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery, useMutation } from 'react-query';
+import { useQuery } from 'react-query';
 import { API } from '../../config/api';
-console.log(dataMovies);
+import {UserContext} from '../../context/userContext';
+
 
 function MovieContaineradmin() {
   // Fetching product data from database
-  let navigate = useNavigate();
-  let { id } = useParams();
+  const [state] = useContext(UserContext);
+  console.log("ini state",state)
 let { data: films } = useQuery('filmsCache', async () => {
   const response = await API.get('/films');
   console.log("ini response",response)
-  console.log("ini fil",films)
   return response.data.data;
 });
+
   return (
     <div>
       <Container className="my-5 overflow-hidden" id="">
         <h3 className="text-light">Movies</h3>
         <Row>
-          {dataMovies.map((movies, index) => {
+          {films?.map((movies, id) => {
             return (
-              <Col md={2} key={index}>
+              <Col md={2} key={id}>
                 <MovieListadmin
-                  movieImg={movies.movieImg}
-                  title={movies.title}
-                  year={movies.year}
-                />
+                  movieImg={movies?.image}
+                  title={movies?.title}
+                  year={movies?.year}
+                  />
               </Col>
             );
           })}

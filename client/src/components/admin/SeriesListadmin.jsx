@@ -2,9 +2,9 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 
-function SeriesListadmin({ seriesImg, title, year }) {
+function SeriesListadmin({ seriesImg, title, year, id }) {
   return (
-    <Link to="/detailadmin" className="text-decoration-none">
+    <Link to={`/film/${id}`} className="text-decoration-none">
       <Card className="rounded border-0 bg-black text-white">
         <Card.Img variant="top" src={seriesImg} />
         <Card.Body>

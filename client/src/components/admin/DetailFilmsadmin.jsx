@@ -1,14 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Card, Col, Container, Row, Button } from "react-bootstrap";
 import AddEpisode from "./AddEpisode";
-import dummyDetailImg from "../../img/hero2.png";
-import Haikyu from "../../img/moviecard/card15.png";
+import { useParams, useNavigate } from 'react-router-dom';
+import { useQuery, useMutation } from 'react-query';
+import { API } from '../../config/api';
+import {UserContext} from '../../context/userContext';
 import "../../css/Detail.modules.css";
 
 const Detailadmin = () => {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
+  const [state] = useContext(UserContext);
+  let navigate = useNavigate();
+  let { id } = useParams();
+let { data: film } = useQuery('filmCache', async () => {
+  const response = await API.get('/film/'+ id);
+  console.log("ini response",response)
+  return response.data.data;
+});
+console.log("ini film",film);
   return (
     <>
       <div
@@ -45,7 +56,7 @@ const Detailadmin = () => {
             >
               <Card.Body className="d-flex">
                 <div className="me-5">
-                  <img src={Haikyu} alt="dummy img" width={160} />
+                  {/* <img src={} alt="dummy img" width={160} /> */}
                 </div>
                 <div>
                   <div>
@@ -70,7 +81,7 @@ const Detailadmin = () => {
           <Col md={6}>
             <Card className="rounded shadow border-0 bg-black text-white position-relative">
               <img
-                src={dummyDetailImg}
+                // src={}
                 alt="haikyu-image"
                 width={500}
                 height={290}
