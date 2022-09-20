@@ -29,16 +29,19 @@ const initialUserState = {
   status: "Active",
 };
 
-
-
 const ProfileDetail = () => {
-  let { data: users } = useQuery('usersCache', async () => {
-    const response = await API.get('/users');
-    return response.data.data;
-  });
-  const [isLogin, setIsLogin] = useState(false);
-  const [state] = useContext(UserContext);
+  const title = "Profile";
+  document.title = "Dumbflix | " + title;
 
+  const [previewImage, setPreviewImage] = useState()
+
+  const [state] = useContext(UserContext);
+  function handleChange(e) {
+    if (e.target.type === 'file') {
+      let url = URL.createObjectURL(e.target.files[0]);
+      setPreviewImage(url)
+    }
+  }
 
   const [userData, setUserData] = useState(initialUserState);
 
@@ -52,10 +55,6 @@ const ProfileDetail = () => {
     setUserData({ ...userData, photo: files });
   };
   console.log("prof",state.user);
-
-// const id = (state.user.id - 1)
-console.log("users",users)
-// console.log(id)
   return (
     <Container>
       <Row className="justify-content-center mt-4">
@@ -119,18 +118,14 @@ console.log("users",users)
                 </div>
               </div>
               <div>
-                <img
-                  src={profileSrc}
-                  alt="profile-picture"
-                  className="profile__img"
-                />
+              <img src={previewImage} alt={previewImage} style={{ width: "60%" }} className="my-2" />
 
                 <input
                   type="file"
                   ref={hiddenFileInput}
                   accept="image/*"
                   className="d-none"
-                  onChange={(e) => handleFileChange(e.target.files[0])}
+                  onChange={handleChange}
                 />
 
                 <Button
