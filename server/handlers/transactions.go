@@ -152,8 +152,8 @@ func (h *handlerTransaction) CreateTransaction(w http.ResponseWriter, r *http.Re
 			Secure: true,
 		},
 		CustomerDetail: &midtrans.CustomerDetails{
-			FName: dataTransactions.Buyer.Name,
-			Email: dataTransactions.Buyer.Email,
+			FName: dataTransactions.User.FullName,
+			Email: dataTransactions.User.Email,
 		},
 	}
 

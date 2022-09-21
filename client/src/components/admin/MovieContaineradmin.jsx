@@ -16,16 +16,18 @@ let { data: films } = useQuery('filmsCache', async () => {
   console.log("ini response",response)
   return response.data.data;
 });
+console.log("ini film", films)
 
   return (
     <div>
-      <Container className="my-5 overflow-hidden" id="">
+      <Container className="my-5 overflow-hidden">
         <h3 className="text-light">Movies</h3>
         <Row>
-          {films?.map((movies, id) => {
+          {films?.map((movies, index) => {
             return (
-              <Col md={2} key={id}>
+              <Col md={2} key={index}>
                 <MovieListadmin
+                id={movies?.id}
                   movieImg={movies?.image}
                   title={movies?.title}
                   year={movies?.year}

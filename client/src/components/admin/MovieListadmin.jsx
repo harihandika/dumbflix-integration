@@ -2,7 +2,7 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 
-function MovieListadmin({ movieImg, title, year, id}) {
+function MovieListadmin({id ,movieImg, title, year}) {
   return (
     <Link to={`/film/${id}`} className="text-decoration-none">
       <Card className="rounded border-0 bg-black text-white">

@@ -19,10 +19,11 @@ console.log("ini fil",films)
       <Container className="my-5 overflow-hidden" id="">
         <h4 className="text-light mb-4">TV Series</h4>
         <Row>
-        {films?.map((movies, id) => {
+        {films?.map((movies, index) => {
             return (
-              <Col md={2} key={id}>
+              <Col md={2} key={index}>
                 <SeriesListadmin
+                id={movies?.id}
                   seriesImg={movies?.image}
                   title={movies?.title}
                   year={movies?.year}
