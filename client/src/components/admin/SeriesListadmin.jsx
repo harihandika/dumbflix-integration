@@ -6,7 +6,7 @@ function SeriesListadmin({ seriesImg, title, year, id }) {
   return (
     <Link to={`/film/${id}`} className="text-decoration-none">
       <Card className="rounded border-0 bg-black text-white">
-        <Card.Img variant="top" src={seriesImg} />
+        <Card.Img variant="top" src={seriesImg} style = {{height: "38vh"}} />
         <Card.Body>
           <Card.Title>{title}</Card.Title>
           <p className="text-muted">{year}</p>

@@ -38,6 +38,7 @@ const AddFilm = () => {
     year: "",
     desc: "",
     categoryId: "",
+    link:"",
   });
 
   const getCategories = async () => {
@@ -102,7 +103,7 @@ const AddFilm = () => {
         formData.set("year", form.year);
         formData.set("desc", form.desc);
         formData.set("category_id", form.categoryId);
-  
+        formData.set("link", form.link);
         console.log("form",form);
   
         // Insert film data
@@ -234,70 +235,15 @@ const AddFilm = () => {
                 onChange={handleChange}
               ></textarea>
             </div>
-            <form onSubmit={handleSubmit1}>
-            {formValues.map((element, index) => (
-              <div key={index}>
-                <Row>
-                  <Col
-                    value={element.title || ""}
-                    onChange={(e) => handleChange1(index, e)}
-                  >
-                    <Form.Group
-                      className="mb-3"
-                      controlId="titleEpisode"
-                      style={styles.col}
-                    >
-                      <Form.Control
-                        style={styles.color}
-                        type="text"
-                        placeholder="Title Episode"
-                        className="mb-3 text-white "
-                        name="titleEpisode"
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col>
-                    {/* Attach */}
-                    <Form.Group className="mb-3 ms-1" controlId="attach">
-                      <input type="file" className="d-none" ref={fileInput} />
-                      <Button
-                        style={styles.color}
-                        onClick={handleFileInput}
-                        className="text-secondary"
-                      >
-                        Attach Thumbnail <BsPaperclip className="text-danger" />
-                      </Button>
-                    </Form.Group>
-                  </Col>
-                </Row>
-
-                {/* Link Film */}
-                <Form.Group className="mb-3" controlId="link">
-                  <Form.Control
-                    style={styles.color}
-                    type="text"
-                    placeholder="Link FIlm"
-                    className="mb-3 text-white "
-                    name="link"
-                    value={element.link || ""}
-                    onChange={(e) => handleChange1(index, e)}
-                  />
-                </Form.Group>
-              </div>
-            ))}
-          </form>
-
-          {/* Address */}
-          <Form.Group className="mb-3" controlId="add">
-            <input type="file" className="d-none" ref={fileInput} />
-            <Button
-              style={styles.color}
-              onClick={() => addFormFields()}
-              className="text-secondary text-center col-12"
-            >
-              <AiOutlinePlus className="text-danger" />
-            </Button>
-          </Form.Group>
+            <div className="col-10 d-flex justify-content-center">
+              <Form.Control
+                type="text"
+                placeholder="LinkFilm"
+                name="link"
+                onChange={handleChange}
+                className="bg-dark text-white"
+              />
+            </div>
             <div className="col-10 d-flex justify-content-end">
               <button
                 class="btn btn-danger float-md-end btn-lg  d-grid gap-2 col-2 "

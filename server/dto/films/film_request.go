@@ -6,6 +6,7 @@ type CreateFilmRequest struct {
 	Year       string `json:"year" form:"year" validate:"required"`
 	CategoryID int    `json:"category_id" form:"category_id" gorm:"type: int"`
 	Desc       string `json:"desc" form:"desc" validate:"required"`
+	LinkFilm   string `json:"link"`
 }
 
 type UpdateFilmRequest struct {

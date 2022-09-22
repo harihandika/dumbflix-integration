@@ -8,7 +8,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"math/rand"
 	"net/http"
 	"os"
 	"strconv"
@@ -108,7 +107,7 @@ func (h *handlerTransaction) CreateTransaction(w http.ResponseWriter, r *http.Re
 	var TransIdIsMatch = false
 	var TransactionId int
 	for !TransIdIsMatch {
-		TransactionId = userId + rand.Intn(10000) - rand.Intn(100)
+		TransactionId = int(time.Now().Unix())
 		transactionData, _ := h.TransactionRepository.GetTransaction(TransactionId)
 		if transactionData.ID == 0 {
 			TransIdIsMatch = true
@@ -228,7 +227,7 @@ func SendMail(status string, transaction models.Transaction) {
 		var CONFIG_AUTH_EMAIL = os.Getenv("EMAIL_SYSTEM")
 		var CONFIG_AUTH_PASSWORD = os.Getenv("PASSWORD_SYSTEM")
 
-		var expire = transaction.DueDate
+		var name = transaction.User.FullName
 		var price = strconv.Itoa(transaction.Price)
 
 		mailer := gomail.NewMessage()
@@ -256,7 +255,7 @@ func SendMail(status string, transaction models.Transaction) {
 		  <li>Status : <b>%s</b></li>
 		</ul>
 		</body>
-	  </html>`, expire, price, status))
+	  </html>`, name, price, status))
 
 		dialer := gomail.NewDialer(
 			CONFIG_SMTP_HOST,

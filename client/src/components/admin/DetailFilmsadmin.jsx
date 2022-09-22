@@ -8,6 +8,8 @@ import {UserContext} from '../../context/userContext';
 import "../../css/Detail.modules.css";
 
 const Detailadmin = () => {
+  const title = "Detail";
+  document.title = "Dumbflix | " + title;
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -29,11 +31,11 @@ console.log("ini film",film);
         <iframe
           width="1000"
           height="500"
-          src="https://www.youtube.com/embed/JOGp2c7-cKc"
+          src={film?.link}
           title="Haikyuu Trailer"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
+          allowFullScreen = "true"
         ></iframe>
       </div>
 
@@ -56,24 +58,20 @@ console.log("ini film",film);
             >
               <Card.Body className="d-flex">
                 <div className="me-5">
-                  {/* <img src={} alt="dummy img" width={160} /> */}
+                  <img src={film?.thumbnail} alt="dummy img" style={{height:"42vh", width:"16vw"}} />
                 </div>
                 <div>
                   <div>
-                    <h3>Haikyu!!</h3>
+                    <h3>{film?.title}</h3>
                     <div className="d-flex align-items-center mt-4">
                       <p className="m-0 p-0 text-muted">2017</p>
                       <span className="px-2 ms-3 border border-secondary text-muted rounded">
-                        Tv Series
+                       {film?.category.name}
                       </span>
                     </div>
                   </div>
 
-                  <p className="mt-4">
-                    Determined to be like the volleyball championship's star
-                    player nicknamed "the small giant", Shoyo joins his school's
-                    volleyball club.
-                  </p>
+                  <p className="mt-4"> {film?.desc} </p>
                 </div>
               </Card.Body>
             </Card>
@@ -81,9 +79,9 @@ console.log("ini film",film);
           <Col md={6}>
             <Card className="rounded shadow border-0 bg-black text-white position-relative">
               <img
-                // src={}
+                src={film?.thumbnail}
                 alt="haikyu-image"
-                width={500}
+                style={{width: "35vw"}}
                 height={290}
                 className="rounded episode__img"
               />

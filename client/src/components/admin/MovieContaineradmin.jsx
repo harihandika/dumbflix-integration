@@ -11,12 +11,18 @@ function MovieContaineradmin() {
   // Fetching product data from database
   const [state] = useContext(UserContext);
   console.log("ini state",state)
+
+  // let { data: categorys } = useQuery('categorysCache', async () => {
+  //   const response1 = await API.get('/categorys');
+  //   console.log("inicate",response1)
+  //   return response1.data.data;
+  // });
 let { data: films } = useQuery('filmsCache', async () => {
   const response = await API.get('/films');
   console.log("ini response",response)
   return response.data.data;
 });
-console.log("ini film", films)
+console.log("cate")
 
   return (
     <div>
