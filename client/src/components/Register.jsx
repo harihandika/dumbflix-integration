@@ -100,7 +100,7 @@ const Register = ({ registerShow,
       </Modal.Header>
       <Modal.Body className="bg-dark text-white border-0">
         {/*  */}
-      {/* {message && message} */}
+      {message && message}
       {/*  */}
         <Form className="px-1" onSubmit={(e) => handleSubmit1.mutate(e)}>
           {/* Email */}
@@ -125,7 +125,11 @@ const Register = ({ registerShow,
 
           {/* Gender */}
           <Form.Group className="mb-3" controlId="gender">
-              <Form.Control type="text" name="gender" placeholder="Gender" className="bg-group" onChange={handleChange} />
+          <Form.Select className="mb-3 bg-group" onChange={handleChange} name="gender">
+              <option hidden selected > Gender </option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </Form.Select>
             </Form.Group>
 
           {/* Phone
@@ -141,7 +145,7 @@ const Register = ({ registerShow,
             </Form.Group>
 
           <div className="bg-dark text-white border-0 d-grid gap-2 p-4">
-            <Button variant={ "danger" } onClick={() => setRegisterShow(false)} type="submit" className={"text-light"}>
+            <Button variant={ "danger" }type="submit" className={"text-light"}>
               { "Register"}
             </Button>
             <p className="text-muted text-center mt-2">
