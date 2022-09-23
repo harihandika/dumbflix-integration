@@ -8,9 +8,13 @@ import { useNavigate } from "react-router-dom";
 import ProfileIcon from "../img/profileIcon.jpg";
 import Logo from "../img/dumbflix.png";
 
+
+// if (localStorage.token) {
+//   setAuthToken(localStorage.token);
+// }
 const Navbarprofil = () => {
 
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const [state, dispatch] = useContext(UserContext);
 
   let navigate = useNavigate()
@@ -89,16 +93,16 @@ const Navbarprofil = () => {
                   />
                 </Dropdown.Toggle>
                 <Dropdown.Menu variant="dark">
-                  <Dropdown.Item href="/profile">
+                  <Dropdown.Item as={Link} to="/profile">
                     <FaUserAlt className="text-danger me-2" />{" "}
                     <span>Profile</span>
                   </Dropdown.Item>
-                  <Dropdown.Item href="/payment">
+                  <Dropdown.Item as={Link} to="/payment">
                     <FaMoneyBillAlt className="text-danger me-2" />{" "}
                     <span>Pay</span>
                   </Dropdown.Item>
                   <Dropdown.Divider className="bg-secondary" />
-                  <Dropdown.Item href="/auth" >
+                  <Dropdown.Item as={Link} to="/auth" >
                     <FaSignOutAlt className="text-danger me-2" />
                     <span onClick={logout}>Logout</span>
                   </Dropdown.Item>

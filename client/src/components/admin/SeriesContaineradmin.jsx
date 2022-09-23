@@ -8,12 +8,20 @@ import {UserContext} from '../../context/userContext';
 
 function SeriesContaineradmin() {
   const [state] = useContext(UserContext);
-let { data: films } = useQuery('filmsCache', async () => {
-  const response = await API.get('/films');
-  console.log("ini response",response)
-  return response.data.data;
-});
-console.log("ini fil",films)
+  let { data: films } = useQuery('seriesCache', async () => {
+    const response = await API.get('/films');
+    console.log("ini response",response)
+   
+  const filterCategory = response.data.data;
+  const filterResult = filterCategory.filter((e) => {
+    if(e.category.id === 2){
+      return e.category.id === 2;
+  
+    }
+  });
+  console.log("ini film",filterResult);
+  return filterResult;
+  });
   return (
     <div>
       <Container className="my-5 overflow-hidden" id="">

@@ -24,24 +24,21 @@ if (localStorage.token) {
 export default function App() {
   let navigate = useNavigate();
   const [state, dispatch] = useContext(UserContext);
-  // console.clear();
-  console.log("ini state", state)
   useEffect(() => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
-    console.log(state.isLogin);
-
-    // Redirect Auth
-    // if (state.isLogin === false) {
-    //   navigate('/auth');
-    // } else {
-    //   if (state.user.status === 'admin') {
-    //     navigate('/homeadmin');
-    //   } else if (state.user.status === '') {
-    //     navigate('/');
-    //   }
-    // }
+    
+    console.log("ini state", state);
+    if (state.isLogin === false) {
+      navigate('/auth');
+    } else {
+      if (state.user.role === 'Admin') {
+        navigate('/homeadmin');
+      } else if (state.user.role === 'Customer') {
+        navigate('/');
+      }
+    }
   }, [state]);
 // console.log("bacaaa",isLogin)
   const checkUser = async () => {
@@ -76,6 +73,7 @@ export default function App() {
     if (localStorage.token) {
       checkUser();
     }
+        console.log("user context", state);
   }, []);
 
   return (

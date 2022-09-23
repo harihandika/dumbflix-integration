@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import MovieListadmin from "./MovieListadmin";
-import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { API } from '../../config/api';
 import {UserContext} from '../../context/userContext';
@@ -10,19 +9,22 @@ import {UserContext} from '../../context/userContext';
 function MovieContaineradmin() {
   // Fetching product data from database
   const [state] = useContext(UserContext);
-  console.log("ini state",state)
 
-  // let { data: categorys } = useQuery('categorysCache', async () => {
-  //   const response1 = await API.get('/categorys');
-  //   console.log("inicate",response1)
-  //   return response1.data.data;
-  // });
-let { data: films } = useQuery('filmsCache', async () => {
+
+let { data: films } = useQuery('moviesCache', async () => {
   const response = await API.get('/films');
   console.log("ini response",response)
-  return response.data.data;
+ 
+const filterCategory = response.data.data;
+const filterResult = filterCategory.filter((e) => {
+  if(e.category.id === 1){
+    return e.category.id === 1;
+
+  }
 });
-console.log("cate")
+console.log("ini film",filterResult);
+return filterResult;
+});
 
   return (
     <div>

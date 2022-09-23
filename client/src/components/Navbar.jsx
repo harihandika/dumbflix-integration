@@ -10,7 +10,7 @@ import Register from "./Register";
 import Login from "./Login";
 
 const NavbarLogin = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLoginn, setIsLoginn] = useState(true);
   const [loginShow, setLoginShow] = useState(false);
   const [registerShow, setRegisterShow] = useState(false);
 
@@ -36,8 +36,8 @@ const NavbarLogin = () => {
   };
 
   useEffect(() => {
-    if (user) setIsLogin(true);
-    else setIsLogin(false);
+    if (user) setIsLoginn(true);
+    else setIsLoginn(false);
   }, [user, handleLogout]);
 
   return (
@@ -90,40 +90,6 @@ const NavbarLogin = () => {
               <img src={Logo} alt="" />
             </Navbar.Brand>
           </div>
-          {isLogin ? (
-          <Nav className="ms-auto">
-              <Dropdown>
-                <Dropdown.Toggle
-                  style={{ marginRight: "50px" }}
-                  id="user-dropdown"
-                  variant="dark"
-                >
-                  <img
-                    href="/"
-                    src={ProfileIcon}
-                    alt="ProfileIcon"
-                    width={40}
-                    className="rounded-pill"
-                  />
-                </Dropdown.Toggle>
-                <Dropdown.Menu variant="dark">
-                  <Dropdown.Item href="/profile">
-                    <FaUserAlt className="text-danger me-2" />{" "}
-                    <span>Profile</span>
-                  </Dropdown.Item>
-                  <Dropdown.Item href="/payment">
-                    <FaMoneyBillAlt className="text-danger me-2" />{" "}
-                    <span>Pay</span>
-                  </Dropdown.Item>
-                  <Dropdown.Divider className="bg-secondary" />
-                  <Dropdown.Item href="#" onClick={() => setIsLogin(false)}>
-                    <FaSignOutAlt className="text-danger me-2" />
-                    <span>Logout</span>
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-          </Nav>
-          ):(
           <Nav className="ms-auto">
               <div>
               <Button
@@ -146,12 +112,11 @@ const NavbarLogin = () => {
         loginHere={loginHere}
         loginShow={loginShow}
         setLoginShow={setLoginShow}
-        setIsLogin={setIsLogin} />
+        setIsLogin={setIsLoginn} />
             <Register registerHere={registerHere}
         registerShow={registerShow}
         setRegisterShow={setRegisterShow} />
           </Nav>
-          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
