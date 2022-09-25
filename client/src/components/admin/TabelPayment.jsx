@@ -1,9 +1,16 @@
 import React from "react";
 import { Table, Card, Dropdown } from "react-bootstrap";
 
-const TabelPayment = () => {
+
+const styles = {
+  cardd: {
+    backgroundColor: "black",
+    margin: "20px",
+  },
+};
+const Transactio12 = () => {
   return (
-    <Card className="bg-dark"  style={{ marginTop: '60px'}}>
+    <Card style={styles.cardd}>
       <Card.Body className="text-light m-3">
         <Card.Title className="mb-4">Incoming Transaction</Card.Title>
         <Table striped bordered hover variant="dark">
@@ -39,10 +46,16 @@ const TabelPayment = () => {
                     className="fs-4"
                   ></Dropdown.Toggle>
                   <Dropdown.Menu className="bg-dark">
-                    <Dropdown.Item href="#/action-1" className="text-success text-center">
+                    <Dropdown.Item
+                      href="#/action-1"
+                      className="text-success text-center"
+                    >
                       <span>Approved</span>
                     </Dropdown.Item>
-                    <Dropdown.Item href="#/action-2" className="text-danger text-center">
+                    <Dropdown.Item
+                      href="#/action-2"
+                      className="text-danger text-center"
+                    >
                       <span>Cancel</span>
                     </Dropdown.Item>
                   </Dropdown.Menu>
@@ -69,10 +82,16 @@ const TabelPayment = () => {
                     className="fs-4"
                   ></Dropdown.Toggle>
                   <Dropdown.Menu className="bg-dark">
-                    <Dropdown.Item href="#/action-1" className="text-success text-center">
+                    <Dropdown.Item
+                      href="#/action-1"
+                      className="text-success text-center"
+                    >
                       <span>Approved</span>
                     </Dropdown.Item>
-                    <Dropdown.Item href="#/action-2" className="text-danger text-center">
+                    <Dropdown.Item
+                      href="#/action-2"
+                      className="text-danger text-center"
+                    >
                       <span>Cancel</span>
                     </Dropdown.Item>
                   </Dropdown.Menu>
@@ -99,10 +118,16 @@ const TabelPayment = () => {
                     className="fs-4"
                   ></Dropdown.Toggle>
                   <Dropdown.Menu className="bg-dark">
-                    <Dropdown.Item href="#/action-1" className="text-success text-center">
+                    <Dropdown.Item
+                      href="#/action-1"
+                      className="text-success text-center"
+                    >
                       <span>Approved</span>
                     </Dropdown.Item>
-                    <Dropdown.Item href="#/action-2" className="text-danger text-center">
+                    <Dropdown.Item
+                      href="#/action-2"
+                      className="text-danger text-center"
+                    >
                       <span>Cancel</span>
                     </Dropdown.Item>
                   </Dropdown.Menu>
@@ -129,10 +154,16 @@ const TabelPayment = () => {
                     className="fs-4"
                   ></Dropdown.Toggle>
                   <Dropdown.Menu className="bg-dark">
-                    <Dropdown.Item href="#/action-1" className="text-success text-center">
+                    <Dropdown.Item
+                      href="#/action-1"
+                      className="text-success text-center"
+                    >
                       <span>Approved</span>
                     </Dropdown.Item>
-                    <Dropdown.Item href="#/action-2" className="text-danger text-center">
+                    <Dropdown.Item
+                      href="#/action-2"
+                      className="text-danger text-center"
+                    >
                       <span>Cancel</span>
                     </Dropdown.Item>
                   </Dropdown.Menu>
@@ -159,10 +190,16 @@ const TabelPayment = () => {
                     className="fs-4"
                   ></Dropdown.Toggle>
                   <Dropdown.Menu className="bg-dark">
-                    <Dropdown.Item href="#/action-1" className="text-success text-center">
+                    <Dropdown.Item
+                      href="#/action-1"
+                      className="text-success text-center"
+                    >
                       <span>Approved</span>
                     </Dropdown.Item>
-                    <Dropdown.Item href="#/action-2" className="text-danger text-center">
+                    <Dropdown.Item
+                      href="#/action-2"
+                      className="text-danger text-center"
+                    >
                       <span>Cancel</span>
                     </Dropdown.Item>
                   </Dropdown.Menu>
@@ -189,16 +226,21 @@ const TabelPayment = () => {
                     className="fs-4"
                   ></Dropdown.Toggle>
                   <Dropdown.Menu className="bg-dark">
-                    <Dropdown.Item href="#/action-1" className="text-success text-center">
+                    <Dropdown.Item
+                      href="#/action-1"
+                      className="text-success text-center"
+                    >
                       <span>Approved</span>
                     </Dropdown.Item>
-                    <Dropdown.Item href="#/action-2" className="text-danger text-center">
+                    <Dropdown.Item
+                      href="#/action-2"
+                      className="text-danger text-center"
+                    >
                       <span>Cancel</span>
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </td>
-              {/* <BsFillCaretDownFill color="blue" /> */}
             </tr>
           </tbody>
         </Table>
@@ -206,4 +248,4 @@ const TabelPayment = () => {
     </Card>
   );
 };
-export default TabelPayment;
+export default Transaction12;

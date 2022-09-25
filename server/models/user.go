@@ -12,6 +12,7 @@ type User struct {
 	Addres    string `json:"addres" gorm:"type: varchar(255)"`
 	Subscribe bool   `json:"subscribe"`
 	Role      string `json:"role"`
+	Profile	  string `json:"image"`
 }
 
 // berfungsi untuk relasi

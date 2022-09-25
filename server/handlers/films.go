@@ -157,6 +157,7 @@ func (h *handlerFilm) UpdateFilm(w http.ResponseWriter, r *http.Request) {
 	if request.Desc != "" {
 		film.Desc = request.Desc
 	}
+	
 
 	data, err := h.FilmRepository.UpdateFilm(film)
 	if err != nil {

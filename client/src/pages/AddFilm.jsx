@@ -49,23 +49,6 @@ const AddFilm = () => {
       console.log(error);
     }
   };
-
-  // const handleChangeCategoryId = (e) => {
-  //   const id = e.target.value;
-  //   const checked = e.target.checked;
-
-  //   if (checked) {
-  //     // Save category id if checked
-  //     setCategoryId([...categoryId, parseInt(id)]);
-  //   } else {
-  //     // Delete category id from variable if unchecked
-  //     let newCategoryId = categoryId.filter((categoryIdItem) => {
-  //       return categoryIdItem != id;
-  //     });
-  //     setCategoryId(newCategoryId);
-  //   }
-  // };
-  //   console.log(setCategoryId);
     const handleChange = (e) => {
       setForm({
         ...form,
@@ -154,9 +137,9 @@ const AddFilm = () => {
           className="d-flex justify-content-center"
         >
           <div className="row g-2 d-flex justify-content-center">
-            <div style={{ width: "950px", marginLeft: "35px" }}>
+            <div style={{ width: "68vw", marginLeft: "30px" }}>
               <div className="form-floating">
-                <Form.Group className="mt-3">
+                <Form.Group className="mt-3 me-3">
                   <Form.Control
                     type="text"
                     name="title"
@@ -170,20 +153,21 @@ const AddFilm = () => {
             </div>
             <div className="col-2">
               <div className="form-floating">
-                <Form.Group className=" mt-2 ms-2 d-flex ">
-                  {preview && (
+                <Form.Group className=" mt-3 ms-2 d-flex"
+                style={{height:"8vh"}}>
+                  {/* {preview && (
                     <div>
                       <img
                         src={preview}
                         style={{
-                          maxWidth: "150px",
-                          maxHeight: "150px",
+                          maxWidth: "40px",
+                          maxHeight: "10px",
                           objectFit: "cover",
                         }}
                         alt={preview}
                       />
                     </div>
-                  )}
+                  )} */}
                   <Form.Label
                     for="fileattach"
                     className="d-block p-2 bg-dark text-white rounded border"
@@ -214,7 +198,7 @@ const AddFilm = () => {
             </div>
             <div className="col-10 d-flex justify-content-center">
               <select
-                className="form-select bg-dark text-white"
+                className="form-select bg-dark text-white mt-3"
                 aria-label="Default select example"
                 onChange={handleChange}
                 name="categoryId"
@@ -227,7 +211,7 @@ const AddFilm = () => {
             </div>
             <div className="col-10 d-flex justify-content-center input-group-lg">
               <textarea
-                className="form-control bg-dark text-white"
+                className="form-control bg-dark text-white mt-3"
                 id="exampleFormControlTextarea1"
                 placeholder="Description"
                 rows="3"
@@ -235,7 +219,7 @@ const AddFilm = () => {
                 onChange={handleChange}
               ></textarea>
             </div>
-            <div className="col-10 d-flex justify-content-center">
+            <div className="col-10 d-flex justify-content-center mt-4">
               <Form.Control
                 type="text"
                 placeholder="LinkFilm"
@@ -246,7 +230,7 @@ const AddFilm = () => {
             </div>
             <div className="col-10 d-flex justify-content-end">
               <button
-                class="btn btn-danger float-md-end btn-lg  d-grid gap-2 col-2 "
+                class="btn btn-danger float-md-end btn-lg  d-grid gap-2 col-2 mt-3"
                 type="submit"
               >
                 Save

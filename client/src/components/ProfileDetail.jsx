@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import ProfileIcon from "../img/profileIcon.jpg";
+import ProfileIcon from "../img/dataimg/ft3.jpeg";
 import "../css/Profile.modules.css";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from 'react-query';
@@ -33,7 +33,7 @@ const ProfileDetail = () => {
   const title = "Profile";
   document.title = "Dumbflix | " + title;
 
-  const [previewImage, setPreviewImage] = useState()
+  const [previewImage, setPreviewImage] = useState(ProfileIcon)
 
   const [state] = useContext(UserContext);
   function handleChange(e) {
@@ -90,7 +90,7 @@ const ProfileDetail = () => {
                     </div>
                   </div>
                   <div className="d-flex mb-3 align-items-start">
-                    {state.user.gender !== "Male" ? (
+                    {state.user.gender === "Male" ? (
                       <FaMale className="text-danger me-3 fs-1" />
                     ) : (
                       <FaFemale className="text-danger me-3 fs-1" />
@@ -117,8 +117,8 @@ const ProfileDetail = () => {
                   </div>
                 </div>
               </div>
-              <div>
-              <img src={previewImage} alt={previewImage} style={{ width: "60%" }} className="my-2" />
+              <div className="text-center">
+              <img src={previewImage} alt={previewImage} style={{ width: "20vw", height : "60vh" }} className="my-2" />
 
                 <input
                   type="file"
@@ -129,9 +129,9 @@ const ProfileDetail = () => {
                 />
 
                 <Button
-                  style={{ width: "200px" }}
+                  style={{ width: "15vw" }}
                   variant="danger"
-                  className="changePhotoBtn mt-2 btn-lg"
+                  className="changePhotoBtn mt-2 btn-lg me-5"
                   onClick={handleFileInput}
                 >
                   Change Photo

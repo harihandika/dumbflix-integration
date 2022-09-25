@@ -45,48 +45,8 @@ const NavbarLogin = () => {
       <Container fluid>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
-            navbarScroll
-          >
-            <Nav.Link
-              as={Link}
-              style={{
-                color: "white",
-                marginLeft: "30px",
-                fontWeight: "bold",
-                marginRight: "10px",
-              }}
-              to="/"
-            >
-              Home
-            </Nav.Link>
-            <Nav.Link
-              as={Link}
-              style={{
-                color: "white",
-                fontWeight: "bold",
-                marginRight: "10px",
-              }}
-              to="/tvshows"
-            >
-              TV Shows
-            </Nav.Link>
-            <Nav.Link
-              as={Link}
-              style={{
-                color: "white",
-                fontWeight: "bold",
-                marginRight: "10px",
-              }}
-              to="/movies"
-            >
-              Movies
-            </Nav.Link>
-          </Nav>
-          <div style={{ marginRight: "90px" }}>
-            <Navbar.Brand as={Link} to="/">
+          <div style={{ marginLeft: "40vw" }}>
+            <Navbar.Brand >
               <img src={Logo} alt="" />
             </Navbar.Brand>
           </div>

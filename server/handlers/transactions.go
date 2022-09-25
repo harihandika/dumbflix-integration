@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
 	"os"
 	"strconv"
@@ -107,7 +108,7 @@ func (h *handlerTransaction) CreateTransaction(w http.ResponseWriter, r *http.Re
 	var TransIdIsMatch = false
 	var TransactionId int
 	for !TransIdIsMatch {
-		TransactionId = int(time.Now().Unix())
+		TransactionId = userId + rand.Intn(1000) - rand.Intn(1000)
 		transactionData, _ := h.TransactionRepository.GetTransaction(TransactionId)
 		if transactionData.ID == 0 {
 			TransIdIsMatch = true
@@ -223,11 +224,11 @@ func SendMail(status string, transaction models.Transaction) {
 	if status != transaction.Status && (status == "success") {
 		var CONFIG_SMTP_HOST = "smtp.gmail.com"
 		var CONFIG_SMTP_PORT = 587
-		var CONFIG_SENDER_NAME = "harihandika456@gmail.com"
+		var CONFIG_SENDER_NAME = "harihandika2441998@gmail.com"
 		var CONFIG_AUTH_EMAIL = os.Getenv("EMAIL_SYSTEM")
 		var CONFIG_AUTH_PASSWORD = os.Getenv("PASSWORD_SYSTEM")
 
-		var name = transaction.User.FullName
+		var expire = transaction.DueDate
 		var price = strconv.Itoa(transaction.Price)
 
 		mailer := gomail.NewMessage()
@@ -255,7 +256,7 @@ func SendMail(status string, transaction models.Transaction) {
 		  <li>Status : <b>%s</b></li>
 		</ul>
 		</body>
-	  </html>`, name, price, status))
+	  </html>`, expire, price, status))
 
 		dialer := gomail.NewDialer(
 			CONFIG_SMTP_HOST,

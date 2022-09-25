@@ -1,76 +1,47 @@
-import React, { useState } from "react";
-import { Row, Col, Container, Card } from "react-bootstrap";
-import { FaArrowAltCircleRight } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import { useQuery, useMutation } from 'react-query';
+import { API } from '../../config/api';
+import {UserContext} from '../../context/userContext';
 import TvSeriesList from "./TVSeriesList";
-import dummyTvSeriesImg from "../../img/GOT.jpg";
-import JJK from "../../img/jujutsuKaisen.jpg";
-import Persona from "../../img/persona3.jpg";
-import Spy from "../../img/spyxfamily.jpg";
-import Castlevania from "../../img/castlevania.jpg";
-import MH from "../../img/moneyHeist.jpg";
 
 const TvSeriesContainer = () => {
-  const [tvSeriesList, setTvSeriesList] = useState([
-    {
-      tvSeriesImg: dummyTvSeriesImg,
-      title: "Game of Thrones",
-      year: 2011,
-    },
-    {
-      tvSeriesImg: JJK,
-      title: "Jujutsu Kaisen",
-      year: 2021,
-    },
-    {
-      tvSeriesImg: Persona,
-      title: "Persona 3",
-      year: 2016,
-    },
-    {
-      tvSeriesImg: Spy,
-      title: "Spy X Family",
-      year: 2022,
-    },
-    {
-      tvSeriesImg: Castlevania,
-      title: "Castlevania",
-      year: 2017,
-    },
-    {
-      tvSeriesImg: MH,
-      title: "Money Heist",
-      year: 2017,
-    },
-  ]);
+  const [state] = useContext(UserContext);
+  let { data: films } = useQuery('seriesCache', async () => {
+    const response = await API.get('/films');
+    console.log("ini response",response)
+   
+  const filterCategory = response.data.data;
+  const filterResult = filterCategory.filter((e) => {
+    if(e.category.id === 2){
+      return e.category.id === 2;
+  
+    }
+  });
+  console.log("ini film",filterResult);
+  return filterResult;
+  });
   return (
-    <Container className="my-5 overflow-hidden" id="tv-series">
-      <h3 className="text-start text-white fw-bold mb-3">Tv Series</h3>
-      <Row>
-        {tvSeriesList.map((tv, index) => (
-          <Col md={2} key={index}>
-            <TvSeriesList
-              tvSeriesImg={tv.tvSeriesImg}
-              title={tv.title}
-              year={tv.year}
-            />
-          </Col>
-        ))}
-        <Col md={2}>
-          <Card className="rounded shadow border-0 bg-black text-white d-flex justify-content-center align-items-center">
-            <Link
-              to="/tvshows"
-              className="text-decoration-none text-white see__more-link"
-            >
-              <p>
-                See More <FaArrowAltCircleRight />
-              </p>
-            </Link>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+    <div>
+      <Container className="my-5 overflow-hidden" id="">
+        <h4 className="text-light mb-4">TV Series</h4>
+        <Row>
+        {films?.map((movies, index) => {
+            return (
+              <Col md={2} key={index}>
+                <TvSeriesList
+                id={movies?.id}
+                  seriesImg={movies?.image}
+                  title={movies?.title}
+                  year={movies?.year}
+                />{" "}
+              </Col>
+            );
+          })}
+        </Row>
+      </Container>
+    </div>
   );
-};
+}
 
 export default TvSeriesContainer;

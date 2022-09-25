@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Routes, Route, BrowserRouter, useNavigate } from "react-router-dom";
 import Movies from "./pages/Movies";
 import Home from "./pages/Home";
@@ -12,6 +12,7 @@ import AddFilm from "./pages/AddFilm";
 import Layout from "./widgets/Layout";
 import HomeAdmin from "./pages/HomeAdmin";
 import Detailadmin from "./components/admin/DetailFilmsadmin";
+import PrivateRoute from "./components/PrivateRoute";
 import Payment from "./pages/Payment";
 import NotFound from "./pages/NotFound";
 import { API, setAuthToken } from './config/api';
@@ -40,6 +41,8 @@ export default function App() {
       }
     }
   }, [state]);
+
+  
 // console.log("bacaaa",isLogin)
   const checkUser = async () => {
     try {
@@ -78,13 +81,14 @@ export default function App() {
 
   return (
       <Routes>
-        <Route path="/" element={<Home />} />
         <Route path="/auth" element={<HomeAuth />} />
+        <Route path="/" element={<Home />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/tvshows" element={<TVShows />} />
-        <Route path="/details" element={<FilmDetails />} />
+        <Route path="/details/:id" element={<FilmDetails />} />
         <Route path="/profile" element={<ProfileDetails />} />
         <Route path="/payment" element={<Payment />} />
+
         <Route
           path="/homeadmin"
           element={

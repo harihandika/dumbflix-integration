@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
-
+	"os"
 	"github.com/go-playground/validator/v10"
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/gorilla/mux"
@@ -99,14 +99,15 @@ func (h *handlerUser) GetUser(w http.ResponseWriter, r *http.Request) {
 
 func (h *handlerUser) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	dataContex := r.Context().Value("dataFile")
+	filename := dataContex.(string)
+	request := usersdto.UpdateUserRequest{
+		Profile : filename,
 
-	request := new(usersdto.UpdateUserRequest)
-	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		response := dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()}
-		json.NewEncoder(w).Encode(response)
-		return
+		Name:	r.FormValue("name"),
+		Email:	r.FormValue("email"),
 	}
+
 
 	id, _ := strconv.Atoi(mux.Vars(r)["id"])
 	user, err := h.UserRepository.GetUser(int(id))
@@ -136,6 +137,10 @@ func (h *handlerUser) UpdateUser(w http.ResponseWriter, r *http.Request) {
 		user.Password = password
 	}
 
+	if request.Profile != "" {
+		user.Profile = request.Profile
+	}
+
 	data, err := h.UserRepository.UpdateUser(user)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -145,7 +150,7 @@ func (h *handlerUser) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponseUser(data)}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponseUserUpdate(data)}
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -232,5 +237,20 @@ func convertResponseUser(u models.User) usersdto.UserResponse {
 		Phone:     u.Phone,
 		Addres:    u.Addres,
 		Subscribe: u.Subscribe,
+		Profile:	os.Getenv("PATH_FILE") + u.Profile,
+	}
+}
+
+func convertResponseUserUpdate(u models.User) usersdto.UserResponse {
+	return usersdto.UserResponse{
+		ID:        u.ID,
+		Name:      u.FullName,
+		Email:     u.Email,
+		Password:  u.Password,
+		Gender:    u.Gender,
+		Phone:     u.Phone,
+		Addres:    u.Addres,
+		Subscribe: u.Subscribe,
+		Profile:	os.Getenv("PATH_FILE") + u.Profile,
 	}
 }

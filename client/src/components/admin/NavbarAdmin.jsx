@@ -1,13 +1,24 @@
 import React from "react";
+import { useState, useContext } from "react";
 import { Navbar, Container, Dropdown } from "react-bootstrap";
 import dumbflix from "../../img/dumbflix.png";
 import userPhoto from "../../img/user.png";
-import { useState } from "react";
+import {UserContext} from '../../context/userContext';
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FaSignOutAlt, FaFilm, FaDollarSign } from "react-icons/fa";
 
 const NavbarAdmin = ({}) => {
   const [isLogin, setIsLogin] = useState(true);
+  const [state, dispatch] = useContext(UserContext);
+  let navigate = useNavigate()
+  const logout = () => {
+    console.log(state)
+    dispatch({
+        type: "LOGOUT"
+    })
+    navigate("/auth")
+}
 
   return (
     <Navbar bg="dark" expand="lg" className="sticky-sm-top">
@@ -38,7 +49,7 @@ const NavbarAdmin = ({}) => {
             <Dropdown.Item
               as={Link}
               to="/homeadmin"
-              onClick={() => setIsLogin(false)}
+              onClick={logout}
             >
               <FaSignOutAlt className="text-danger me-2 fs-5" /> Logout
             </Dropdown.Item>

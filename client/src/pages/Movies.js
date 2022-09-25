@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import NavbarProfil from "../components/NavbarProfil";
 import ImgOverlayExample from "../components/Carousel";
 import MoviesContainer from "../components/Movies/MoviesContainer";
-import MoviesTab from "../components/Movies/MoviesTab";
 
 const Movies = () => {
   return (
@@ -11,7 +10,6 @@ const Movies = () => {
       <NavbarProfil />
       <ImgOverlayExample />
       <MoviesContainer />
-      <MoviesTab />
     </div>
   );
 };
